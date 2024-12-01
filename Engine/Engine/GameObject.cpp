@@ -17,14 +17,14 @@ namespace MyEngine {
 		auto engine = Engine::GetInstance();
 
 		_name = data["name"].GetString();
-		_transform = DeserializeTransform(data["transform"]);
+		transform = DeserializeTransform(data["transform"]);
 
 		for (auto& componentData : data["components"].GetArray())
 		{
 			auto TMP_id = componentData["typeId"].GetString();
 			auto component = ComponentFactory::GetComponentOfType(componentData["typeId"].GetString());
-			component->Init(componentData["serializedData"]);
 			AddComponent(component);
+			component->Init(componentData["serializedData"]);
 		}
 
 		for (auto& childData : data["children"].GetArray())
@@ -39,7 +39,8 @@ namespace MyEngine {
 			component->Update(deltaTime);
 
 		for (auto& child : _children)
-			child->Update(deltaTime);
+			if (auto go = child.lock())
+				go->Update(deltaTime);
 	}
 
 	void GameObject::Render(sre::RenderPass& renderPass) {
@@ -47,7 +48,8 @@ namespace MyEngine {
 			component->Render(renderPass);
 
 		for (auto& child : _children)
-			child->Render(renderPass);
+			if (auto go = child.lock())
+				go->Render(renderPass);
 	}
 
 	void GameObject::KeyEvent(SDL_Event& e) {
@@ -55,7 +57,18 @@ namespace MyEngine {
 			component->KeyEvent(e);
 
 		for (auto& child : _children)
-			child->KeyEvent(e);
+			if (auto go = child.lock())
+				go->KeyEvent(e);
+	}
+
+	void GameObject::OnCollisionStart(ComponentPhysicsBody* other) {
+		for (auto& component : _components)
+			component->OnCollisionStart(other);
+	}
+
+	void GameObject::OnCollisionEnd(ComponentPhysicsBody* other) {
+		for (auto& component : _components)
+			component->OnCollisionEnd(other);
 	}
 
 	void GameObject::AddChild(std::shared_ptr<GameObject> p_object) {
@@ -87,6 +100,7 @@ namespace MyEngine {
 			glm::scale(scl);
 	}
 
+	// TODO move to deserialization library (as DeserializeVector3)
 	glm::vec3 GameObject::DeserializeVector(rapidjson::Value& vectorData) {
 		assert(vectorData.IsArray() && "Trying to deserialize a vector from non-vector json value");
 		assert(vectorData.Size() == 3 && "Trying to deserialize a vector from vector json value that doesn't have 3 elements (only 3d vectors supported ATM)");
@@ -98,20 +112,16 @@ namespace MyEngine {
 		return ret;
 	}
 
-	glm::mat4 GameObject::GetTransform() {
-		return _transform;
-	}
-
 	glm::vec3 GameObject::GetPosition() {
-		return _transform[3];
+		return transform[3];
 	}
 
 	glm::quat GameObject::GetRotation() {
 		const glm::vec3 scale = GetScale();
 		return glm::quat_cast(glm::mat3(
-			glm::vec3(_transform[0]) / scale[0],
-			glm::vec3(_transform[1]) / scale[1],
-			glm::vec3(_transform[2]) / scale[2]));
+			glm::vec3(transform[0]) / scale[0],
+			glm::vec3(transform[1]) / scale[1],
+			glm::vec3(transform[2]) / scale[2]));
 	}
 
 	glm::vec3 GameObject::GetEulerAngles() {
@@ -120,26 +130,22 @@ namespace MyEngine {
 
 	glm::vec3 GameObject::GetScale() {
 		return glm::vec3{
-			glm::length(glm::vec3(_transform[0])),
-			glm::length(glm::vec3(_transform[1])),
-			glm::length(glm::vec3(_transform[2]))
+			glm::length(glm::vec3(transform[0])),
+			glm::length(glm::vec3(transform[1])),
+			glm::length(glm::vec3(transform[2]))
 		};
 	}
 
-	void GameObject::SetTransform(glm::mat4 transform) {
-		_transform = transform;
-	}
-
 	void GameObject::SetPosition(glm::vec3 position) {
-		_transform[3][0] = position[0];
-		_transform[3][1] = position[1];
-		_transform[3][2] = position[2];
+		transform[3][0] = position[0];
+		transform[3][1] = position[1];
+		transform[3][2] = position[2];
 	}
 
-	void GameObject::SetRotation(glm::quat _rotation) {
-		_transform =
+	void GameObject::SetRotation(glm::quat rotation) {
+		transform =
 			glm::translate(GetPosition()) *
-			glm::mat4_cast(_rotation) *
+			glm::mat4_cast(rotation) *
 			glm::scale(GetScale());
 	}
 
@@ -155,6 +161,10 @@ namespace MyEngine {
 
 		// we first undo the current scale, then apply the new one
 		// (not pretty, but gets the job done)
-		_transform = glm::scale(scale) * glm::scale(currScale) * _transform;
+		transform = glm::scale(scale) * glm::scale(currScale) * transform;
+	}
+
+	void GameObject::ResetTransform() {
+		transform = glm::mat4(1);
 	}
 }

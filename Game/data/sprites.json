@@ -1,0 +1,21 @@
+{"frames": [
+
+{
+	"filename": "coconut1_2.png",
+	"frame": {"x":0,"y":0,"w":512,"h":512},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":512,"h":512},
+	"sourceSize": {"w":512,"h":512},
+	"pivot": {"x":0.5,"y":0.5}
+}],
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "sprites.png",
+	"format": "RGBA8888",
+	"size": {"w":512,"h":512},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:d2d5b2a5f5ee6bb81a3389e87ff8521c:485d86f384cf9424986e5502db580854:1eabdf11f75e3a4fe3147baf7b5be24b$"
+}
+}

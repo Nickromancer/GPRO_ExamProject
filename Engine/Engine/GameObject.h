@@ -8,7 +8,9 @@
 
 #include "sre/SpriteBatch.hpp"
 
-#include "rapidjson/document.h"
+#include "3rdParty/rapidjson/document.h"
+
+class ComponentPhysicsBody;
 
 namespace MyEngine {
 	class Component;
@@ -18,45 +20,66 @@ namespace MyEngine {
 
 		// public API
 	public:
+		glm::mat4 transform;
+		float rotation;
 
 		void Init(rapidjson::Value& data);
 		void Update(float);
 		void Render(sre::RenderPass&);
 		void KeyEvent(SDL_Event&);
+		void OnCollisionStart(ComponentPhysicsBody* other);
+		void OnCollisionEnd(ComponentPhysicsBody* other);
 
 		void AddChild(std::shared_ptr<GameObject>);
 		void AddComponent(std::shared_ptr<Component>);
 
+		template<class T>
+		std::weak_ptr<T> CreateComponent() {
+			static_assert(std::is_base_of<Component, T>::value, "Template parameter type is not subclass of MyEngine::Component");
+
+			auto component = std::make_shared<T>();
+			AddComponent(component);
+
+			return component;
+		}
+
 		std::string GetName();
 		void SetName(std::string);
+
+		template <class T>
+		std::weak_ptr<T> FindComponent() {
+			for (std::shared_ptr<Component> component : _components)
+			{
+				std::shared_ptr<T> candidate_ret = std::dynamic_pointer_cast<T>(component);
+				if (candidate_ret != nullptr)
+					return candidate_ret;
+			}
+			return std::weak_ptr<T>();
+		}
 
 		// private fields
 	private:
 		std::weak_ptr<GameObject> _parent;
 		std::weak_ptr<GameObject> _self;
-		std::list<std::shared_ptr<GameObject>> _children = {};
+		std::list<std::weak_ptr<GameObject>> _children = {};
 		std::list<std::shared_ptr<Component>> _components = {};
-
-		std::string	_name;
-		glm::mat4	_transform;
+		std::string _name;
 
 	public:
-		// serialization
-		// (it would be a good idea to move this to its own class, so that the GameObject doesn't need to import all the extra rapidjson classes)
 		glm::mat4 DeserializeTransform(rapidjson::Value& transformData);
+
 		glm::vec3 DeserializeVector(rapidjson::Value& vectorData);
 
 		// transform
 		// (it would be a good idea to move this to its own class, so that the GameObject doesn't need to import all the extra glm classes)
-		glm::mat4 GetTransform();
 		glm::vec3 GetPosition();
 		glm::quat GetRotation();
 		glm::vec3 GetEulerAngles();
 		glm::vec3 GetScale();
-		void SetTransform(glm::mat4 transform);
 		void SetPosition(glm::vec3 position);
-		void SetRotation(glm::quat _rotation);
+		void SetRotation(glm::quat rotation);
 		void SetEulerAngles(glm::vec3 eulerAngles);
 		void SetScale(glm::vec3 scale);
+		void ResetTransform();
 	};
 }

@@ -2,18 +2,63 @@
 	"root": {
 		"name": "_root",
 		"transform": {
-			"position": [0, 0, 0],
-			"rotation": [0, 0, 0],
-			"scale": [1, 1, 1]
+			"position": [ 0, 0, 0 ],
+			"rotation": [ 0, 0, 0 ],
+			"scale": [ 1, 1, 1 ]
 		},
 		"components": [
 			{
 				"typeId": "MUSIC",
 				"serializedData": {
-					"path": "data/music.wav"
+					"path": "data/yin-yang.wav"
 				}
 			}
 		],
-		"children": []
+		"children": [
+			{
+				"name": "coconutNode",
+				"transform": {
+					"position": [ 0, 0, 0 ],
+					"rotation": [ 0, 0, 0 ],
+					"scale": [ 1, 1, 1 ]
+				},
+				"components": [
+					{
+						"typeId": "SPRITE_RENDERER",
+						"serializedData": {
+							"atlas": "sprites",
+							"sprite": "coconut1_2.png"
+						}
+					},
+					{
+						"typeId": "NODE",
+						"serializedData": {}
+					},
+					{
+						"typeId": "BACKGROUND",
+						"serializedData": {}
+					}
+				],
+				"children": []
+			},
+			{
+				"name": "camera",
+				"transform": {
+					"position": [ 0, 0, 0 ],
+					"rotation": [ 0, 0, 0 ],
+					"scale": [ 1, 1, 1 ]
+				},
+				"components": [
+					{
+						"typeId": "CAMERA",
+						"serializedData": {
+							"projectionType": 0,
+							"projectionParams": [ 1000, -1, 1 ]
+						}
+					}
+				],
+				"children": []
+			}
+		]
 	}
 }
