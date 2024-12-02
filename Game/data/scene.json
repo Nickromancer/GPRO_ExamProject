@@ -10,7 +10,7 @@
 			{
 				"typeId": "MUSIC",
 				"serializedData": {
-					"path": "data/yin-yang.wav"
+					"path": "data/music.wav"
 				}
 			}
 		],
@@ -18,7 +18,7 @@
 			{
 				"name": "coconutNode",
 				"transform": {
-					"position": [ 0, 0, 0 ],
+					"position": [ 0,0, 0 ],
 					"rotation": [ 0, 0, 0 ],
 					"scale": [ 1, 1, 1 ]
 				},

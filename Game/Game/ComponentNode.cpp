@@ -2,6 +2,7 @@
 
 #include "ComponentMusic.h"
 #include "Engine/MyEngine.h"
+#include "glm/gtc/constants.hpp"
 
 void ComponentNode::Init(rapidjson::Value& serializedData)
 {
@@ -10,24 +11,26 @@ void ComponentNode::Init(rapidjson::Value& serializedData)
 
 void ComponentNode::Update(float delta)
 {
+    auto gameObject = GetGameObject().lock();
+    auto music = MyEngine::Engine::GetInstance()->GetGameObject("root").lock();
+    auto musicData = music->FindComponent<ComponentMusic>().lock();
 
-	auto gameObject = GetGameObject().lock();
-	auto music = MyEngine::Engine::GetInstance()->GetGameObject("root").lock();
+    double beat = musicData->GetCurrentBeat();
 
-	auto musicData = music->FindComponent<ComponentMusic>().lock();
+    // Define beat duration and scale limits
+    double beatCycle = 1.0;
+    double beatProgress = fmod(beat, beatCycle) / beatCycle; // Progress within the beat cycle (0.0 to 1.0)
 
-	double beat = musicData->GetCurrentBeat();
+    // Define minimum and maximum scales for interpolation
+    glm::vec3 minScale(1.f, 1.f, 1.f); // Minimum scale
+    glm::vec3 maxScale(1.5f, 1.5f, 1.5f); // Maximum scale
 
-	//std::chrono::steady_clock::time_point elapsed = std::chrono::steady_clock::now();
-	//
-	//if (std::chrono::duration_cast<std::chrono::seconds>(elapsed - startTime).count() % 2 < 1)
-	//	gameObject->SetScale(glm::vec3(gameObject->GetScale().x + delta, gameObject->GetScale().y + delta, gameObject->GetScale().z));
-	//else
-	//	gameObject->SetScale(glm::vec3(gameObject->GetScale().x - delta, gameObject->GetScale().y - delta, gameObject->GetScale().z));
+    // Use a smooth sine wave for fluidity
+    float sineWave = 0.5f * (1.0f - cos(beatProgress * glm::two_pi<float>())); // Smooth transition using a sine wave
 
-	if (static_cast<int>(beat) % 2 < 1)
-		gameObject->SetScale(glm::vec3(gameObject->GetScale().x + delta, gameObject->GetScale().y + delta, gameObject->GetScale().z));
-	else
-		gameObject->SetScale(glm::vec3(gameObject->GetScale().x - delta, gameObject->GetScale().y - delta, gameObject->GetScale().z));
+    // Interpolate scale based on the sine wave
+    glm::vec3 interpolatedScale = glm::mix(minScale, maxScale, sineWave);
 
+    // Apply the new scale to the game object
+    gameObject->SetScale(interpolatedScale);
 }
