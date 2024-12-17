@@ -1,7 +1,9 @@
 #include "ComponentNode.h"
 
 #include "ComponentMusic.h"
+#include "picojson.h"
 #include "Engine/MyEngine.h"
+#include "Engine/Components/ComponentRendererSprite.h"
 #include "glm/gtc/constants.hpp"
 
 void ComponentNode::Init(rapidjson::Value& serializedData)
@@ -33,4 +35,5 @@ void ComponentNode::Update(float delta)
 
     // Apply the new scale to the game object
     gameObject->SetScale(glm::vec3(interpolatedScale.x, interpolatedScale.y, 1.f));
+
 }

@@ -7,6 +7,7 @@ namespace MyEngine {
 		{ "RIGIDBODY",[]() { return std::make_shared<ComponentPhysicsBody>(); }},
 		{ "MESH_RENDERER",[]() { return std::make_shared<ComponentRendererMesh>(); }},
 		{ "SPRITE_RENDERER",[]() { return std::make_shared<ComponentRendererSprite>(); }},
+		{ "LANE_MANAGER",[]() { return std::make_shared<ComponentRendererSprite>(); }},
 	};
 
 	void ComponentFactory::RegisterComponentOfType(std::string typeId, std::function<std::shared_ptr<MyEngine::Component>()> builder) {
