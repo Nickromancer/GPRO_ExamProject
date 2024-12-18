@@ -5,7 +5,7 @@
 
 void ComponentBackground::Init(rapidjson::Value&) {
 	auto gameObject = GetGameObject().lock();
-	if (!gameObject)
+		if (!gameObject)
 		return;
 
 	auto p_spriteComp = gameObject->FindComponent<ComponentRendererSprite>();

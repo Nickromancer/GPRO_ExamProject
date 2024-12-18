@@ -9,22 +9,11 @@ using namespace rapidjson;
 
 void ComponentLaneManager::Init(rapidjson::Value& serializedData)
 {
-	_amountOfLanes = serializedData["amountOfLanes"].GetFloat();
-	auto keys = serializedData["keybinds"].GetArray();
-	_noteSheet = serializedData["noteSheet"].GetArray();
+	_amountOfLanes = serializedData["amountOfLanes"].GetInt();
 
-
-	for (int i = 0; i < serializedData["offset"].Size(); ++i)
-	{
-		_offset[i] = serializedData["offset"][i].GetFloat();
-	}
-
-	for (auto& key : keys)
-	{
-		_keys.emplace_back(((key.GetString())));
-	}
-
-	ParseNoteSheet();
+	ParseOffsetVector(serializedData["offset"]);
+	ParseKeybinds(serializedData["keybinds"]);
+	ParseNoteSheet(serializedData["noteSheet"]);
 	CreateGrid();
 
 }
@@ -34,7 +23,7 @@ void ComponentLaneManager::Update(float)
 
 }
 
-void ComponentLaneManager::CreateLane(string key, glm::vec3 pos)
+shared_ptr<MyEngine::GameObject> ComponentLaneManager::CreateLane(string key, glm::vec3 pos)
 {
 	auto engine = MyEngine::Engine::GetInstance();
 	auto gameObject = GetGameObject();
@@ -49,23 +38,46 @@ void ComponentLaneManager::CreateLane(string key, glm::vec3 pos)
 
 	pos.y += sprite->getSpriteSize().y;
 	lane->SetPosition(pos);
+
+	return lane;
 }
 
 void ComponentLaneManager::CreateGrid()
 {
 	glm::vec3 startPos = GetGameObject().lock()->GetPosition();
 
-	for (int i = 0; i < _amountOfLanes; i++)
+	for (unsigned int i = 0; i < _amountOfLanes; i++)
 	{
-		CreateLane(_keys[i], startPos);
+		auto lane = CreateLane(_keys[i], startPos);
+		_lanes.push_back(lane);
 		startPos += _offset;
 	}
 }
 
-void ComponentLaneManager::ParseNoteSheet()
+void ComponentLaneManager::ParseNoteSheet(rapidjson::Value& noteSheet)
 {
-	for (int i = 0; i < _noteSheet.Size(); ++i)
+	auto noteArray = noteSheet.GetArray();
+
+	for (int i = 0; i < noteArray.Size(); ++i)
 	{
-		_sheet.emplace_back(_noteSheet[i][0].GetFloat(), _noteSheet[i][1].GetFloat());
+		_sheet.emplace_back(noteArray[i][0].GetFloat(), noteArray[i][1].GetFloat());
+	}
+}
+
+void ComponentLaneManager::ParseKeybinds(rapidjson::Value& keybinds)
+{
+	auto keys = keybinds.GetArray();
+
+	for (int i = 0; i < keys.Size(); ++i)
+	{
+		_keys.emplace_back(keys[i].GetString());
+	}
+}
+
+void ComponentLaneManager::ParseOffsetVector(rapidjson::Value& offset)
+{
+	for (unsigned int i = 0; i < offset.Size(); ++i)
+	{
+		_offset[i] = offset[i].GetFloat();
 	}
 }

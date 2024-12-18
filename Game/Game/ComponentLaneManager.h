@@ -3,22 +3,22 @@
 #include "Engine/Component.h"
 
 using namespace std;
-
+using namespace rapidjson;
 
 class ComponentLaneManager : public MyEngine::Component
 {
-public:
 	void Init(rapidjson::Value& serializedData) override;
 	void Update(float) override;
-	void CreateLane(string key, glm::vec3);
+	shared_ptr<MyEngine::GameObject> CreateLane(string key, glm::vec3 pos);
 	void CreateGrid();
-	void ParseNoteSheet();
+	void ParseNoteSheet(rapidjson::Value& noteSheet);
+	void ParseKeybinds(rapidjson::Value& keybinds);
+	void ParseOffsetVector(rapidjson::Value& offset);
 
 private:
 	glm::vec3 _offset;
 	std::vector<string> _keys;
 	std::vector<pair<float, float>> _sheet;
-	std::vector<MyEngine::GameObject*> _lanes;
-	int amountOfLanes;
-	float noteSheet[][];
+	std::vector<shared_ptr<MyEngine::GameObject>> _lanes;
+	int _amountOfLanes;
 };
