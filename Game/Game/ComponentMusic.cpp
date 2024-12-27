@@ -115,8 +115,8 @@ void ComponentMusic::ProcessAudio(const std::vector<Uint8>& buffer)
     double elapsedTime = totalSamplesProcessed / static_cast<double>(wav_spec.freq);
     double beat = (elapsedTime / 60.0) * bpm;
 
-    system("cls");
-    std::cout << "Elapsed Time: " << elapsedTime << " s, Current Beat: " << beat << "\n";
+    //system("cls");
+    //std::cout << "Elapsed Time: " << elapsedTime << " s, Current Beat: " << beat << "\n";
     currentBeat = beat;
 
 }

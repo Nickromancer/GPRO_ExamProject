@@ -10,17 +10,30 @@
 			{
 				"typeId": "MUSIC",
 				"serializedData": {
-					"path": "data/yin-yang.wav"
+					"path": "data/music.wav"
+<<<<<<< Updated upstream
+=======
+				}
+			},
+			{
+				"typeId": "PLAYER_CONTROLLER",
+				"serializedData": {
+					"keyBindings": [ "F1", "F2", "F3", "F4", "SPACE", "ENTER" ]
+>>>>>>> Stashed changes
 				}
 			}
 		],
 		"children": [
 			{
-				"name": "coconutNode",
+				"name": "NutNote",
 				"transform": {
-					"position": [ 0,0, 0 ],
+<<<<<<< Updated upstream
+					"position": [ -100,0, 0 ],
+=======
+					"position": [ -100, 0, 0 ],
+>>>>>>> Stashed changes
 					"rotation": [ 0, 0, 0 ],
-					"scale": [ 1, 1, 1 ]
+					"scale": [ 1, 1, 1]
 				},
 				"components": [
 					{
@@ -31,7 +44,7 @@
 						}
 					},
 					{
-						"typeId": "NODE",
+						"typeId": "NUTNOTE",
 						"serializedData": {}
 					},
 					{
