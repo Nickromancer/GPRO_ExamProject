@@ -1,5 +1,6 @@
 #pragma once
 
+#include "ComponentMusic.h"
 #include "Engine/Component.h"
 
 using namespace std;
@@ -21,4 +22,6 @@ private:
 	std::vector<pair<float, float>> _sheet;
 	std::vector<shared_ptr<MyEngine::GameObject>> _lanes;
 	int _amountOfLanes;
+
+	shared_ptr<ComponentMusic> _musicManagaer;
 };

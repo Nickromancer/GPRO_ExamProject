@@ -35,5 +35,4 @@ void ComponentNode::Update(float delta)
 
     // Apply the new scale to the game object
     gameObject->SetScale(glm::vec3(interpolatedScale.x, interpolatedScale.y, 1.f));
-
 }

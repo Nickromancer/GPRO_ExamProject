@@ -3,12 +3,17 @@
 #include "Engine/MyEngine.h"
 #include "Engine/Components/ComponentRendererSprite.h"
 #include "ComponentLane.h"
+#include "ComponentMusic.h"
 
 using namespace std;
 using namespace rapidjson;
 
 void ComponentLaneManager::Init(rapidjson::Value& serializedData)
 {
+	auto root = MyEngine::Engine::GetInstance()->GetGameObject("root").lock();
+
+	_musicManagaer = root->FindComponent<ComponentMusic>().lock();
+
 	_amountOfLanes = serializedData["amountOfLanes"].GetInt();
 
 	ParseOffsetVector(serializedData["offset"]);
@@ -20,6 +25,15 @@ void ComponentLaneManager::Init(rapidjson::Value& serializedData)
 
 void ComponentLaneManager::Update(float)
 {
+	if (!_sheet.empty())
+	{
+		if (_musicManagaer->GetCurrentBeat() >= _sheet[0].first)
+		{
+		//Make a NUT
+		cout << "NUT!" << "\n";
+		_sheet.erase(_sheet.begin() + 0);
+		}
+	}
 
 }
 

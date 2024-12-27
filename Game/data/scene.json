@@ -1,89 +1,89 @@
 {
-	"root": {
-		"name": "_root",
-		"transform": {
-			"position": [ 0, 0, 0 ],
-			"rotation": [ 0, 0, 0 ],
-			"scale": [ 1, 1, 1 ]
-		},
-		"components": [
-			{
-				"typeId": "MUSIC",
-				"serializedData": {
-					"path": "data/yin-yang.wav"
-				}
-			}
-		],
-		"children": [
-			{
-				"name": "laneManager",
-				"transform": {
-					"position": [ -700, 200, 0 ],
-					"rotation": [ 0, 0, 0 ],
-					"scale": [ 1, 1, 1 ]
-				},
-				"components": [
-					{
-						"typeId": "LANE_MANAGER",
-						"serializedData": {
-							"amountOfLanes": 4,
-							"keybinds": [ "Q", "W", "E", "R" ],
-							"offset": [ 0, -300, 0 ],
-							"noteSheet": [
-								[ 1.0, 1.0 ],
-								[ 2.0, 2.0 ],
-								[ 3.0, 3.0 ],
-								[ 4.0, 4.0 ]
-							]
-						}
-					}
-				],
-				"children": []
-			},
-			{
-				"name": "coconutNode",
-				"transform": {
-					"position": [ 0, 0, 0 ],
-					"rotation": [ 0, 0, 0 ],
-					"scale": [ 1, 1, 1 ]
-				},
-				"components": [
-					{
-						"typeId": "SPRITE_RENDERER",
-						"serializedData": {
-							"atlas": "sprites",
-							"sprite": "coconut1_2.png"
-						}
-					},
-					{
-						"typeId": "NODE",
-						"serializedData": {}
-					},
-					{
-						"typeId": "BACKGROUND",
-						"serializedData": {}
-					}
-				],
-				"children": []
-			},
-			{
-				"name": "camera",
-				"transform": {
-					"position": [ 0, 0, 0 ],
-					"rotation": [ 0, 0, 0 ],
-					"scale": [ 1, 1, 1 ]
-				},
-				"components": [
-					{
-						"typeId": "CAMERA",
-						"serializedData": {
-							"projectionType": 0,
-							"projectionParams": [ 1000, -1, 1 ]
-						}
-					}
-				],
-				"children": []
-			}
-		]
-	}
+  "root": {
+    "name": "_root",
+    "transform": {
+      "position": [ 0, 0, 0 ],
+      "rotation": [ 0, 0, 0 ],
+      "scale": [ 1, 1, 1 ]
+    },
+    "components": [
+      {
+        "typeId": "MUSIC",
+        "serializedData": {
+          "path": "data/yin-yang.wav"
+        }
+      }
+    ],
+    "children": [
+      {
+        "name": "laneManager",
+        "transform": {
+          "position": [ -700, 200, 0 ],
+          "rotation": [ 0, 0, 0 ],
+          "scale": [ 1, 1, 1 ]
+        },
+        "components": [
+          {
+            "typeId": "LANE_MANAGER",
+            "serializedData": {
+              "amountOfLanes": 1,
+              "keybinds": [ "Q", "W", "E", "R" ],
+              "offset": [ 0, -300, 0 ],
+              "noteSheet": [
+                [ 1.0, 1.0 ],
+                [ 2.0, 2.0 ],
+                [ 3.0, 3.0 ],
+                [ 4.0, 4.0 ]
+              ]
+            }
+          }
+        ],
+        "children": []
+      },
+      {
+        "name": "coconutNode",
+        "transform": {
+          "position": [ 0, 0, 0 ],
+          "rotation": [ 0, 0, 0 ],
+          "scale": [ 1, 1, 1 ]
+        },
+        "components": [
+          {
+            "typeId": "SPRITE_RENDERER",
+            "serializedData": {
+              "atlas": "sprites",
+              "sprite": "coconut1_2.png"
+            }
+          },
+          {
+            "typeId": "NODE",
+            "serializedData": {}
+          },
+          {
+            "typeId": "BACKGROUND",
+            "serializedData": {}
+          }
+        ],
+        "children": []
+      },
+      {
+        "name": "camera",
+        "transform": {
+          "position": [ 0, 0, 0 ],
+          "rotation": [ 0, 0, 0 ],
+          "scale": [ 1, 1, 1 ]
+        },
+        "components": [
+          {
+            "typeId": "CAMERA",
+            "serializedData": {
+              "projectionType": 0,
+              "projectionParams": [ 1000, -1, 1 ]
+            }
+          }
+        ],
+        "children": []
+      }
+    ]
+  }
 }

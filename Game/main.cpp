@@ -1,5 +1,3 @@
-#include "sre/SpriteAtlas.hpp"
-
 #include "Engine/MyEngine.h"
 #include "Engine/ComponentFactory.h"
 
