@@ -11,6 +11,15 @@
 				"typeId": "MUSIC",
 				"serializedData": {
 					"path": "data/music.wav"
+<<<<<<< Updated upstream
+=======
+				}
+			},
+			{
+				"typeId": "PLAYER_CONTROLLER",
+				"serializedData": {
+					"keyBindings": [ "F1", "F2", "F3", "F4", "SPACE", "ENTER" ]
+>>>>>>> Stashed changes
 				}
 			}
 		],
@@ -18,7 +27,11 @@
 			{
 				"name": "NutNote",
 				"transform": {
+<<<<<<< Updated upstream
 					"position": [ -100,0, 0 ],
+=======
+					"position": [ -100, 0, 0 ],
+>>>>>>> Stashed changes
 					"rotation": [ 0, 0, 0 ],
 					"scale": [ 1, 1, 1]
 				},
