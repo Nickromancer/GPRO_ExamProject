@@ -17,7 +17,7 @@ public:
 	double GetCurrentBeat();
 	~ComponentMusic();
 
-	double bpm = 120;      // Beats per minute (set manually or dynamically)
+	double bpm = 65;      // Beats per minute (set manually or dynamically)
 	double timeSig = 4;    // Time signature (e.g., 4.0 for 4/4 time)
 private:
 	std::chrono::steady_clock::time_point startTime;

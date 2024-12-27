@@ -11,12 +11,14 @@
         "typeId": "MUSIC",
         "serializedData": {
           "path": "data/yin-yang.wav"
-        },
+        }
+      },
       {
 				"typeId": "PLAYER_CONTROLLER",
-				"serializedData": {
-					"keyBindings": [ "F1", "F2", "F3", "F4", "SPACE", "ENTER" ]
-      }
+        "serializedData": {
+          "keyBindings": [ "F1", "F2", "F3", "F4", "SPACE", "ENTER" ]
+        }
+				}
     ],
     "children": [
       {
