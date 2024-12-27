@@ -1,7 +1,9 @@
 #include "ComponentNode.h"
 
 #include "ComponentMusic.h"
+#include "picojson.h"
 #include "Engine/MyEngine.h"
+#include "Engine/Components/ComponentRendererSprite.h"
 #include "glm/gtc/constants.hpp"
 
 void ComponentNode::Init(rapidjson::Value& serializedData)

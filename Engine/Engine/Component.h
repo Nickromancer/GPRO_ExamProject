@@ -16,6 +16,7 @@ namespace MyEngine {
 		friend class GameObject;
 
 	public:
+		virtual ~Component() = default;
 		virtual void Init(rapidjson::Value& serializedData) {};
 		virtual void Update(float) {};
 		virtual void Render(sre::RenderPass& renderPass) {};

@@ -1,0 +1,27 @@
+#pragma once
+
+#include "ComponentMusic.h"
+#include "Engine/Component.h"
+
+using namespace std;
+using namespace rapidjson;
+
+class ComponentLaneManager : public MyEngine::Component
+{
+	void Init(rapidjson::Value& serializedData) override;
+	void Update(float) override;
+	shared_ptr<MyEngine::GameObject> CreateLane(string key, glm::vec3 pos);
+	void CreateGrid();
+	void ParseNoteSheet(rapidjson::Value& noteSheet);
+	void ParseKeybinds(rapidjson::Value& keybinds);
+	void ParseOffsetVector(rapidjson::Value& offset);
+
+private:
+	glm::vec3 _offset;
+	std::vector<string> _keys;
+	std::vector<pair<float, float>> _sheet;
+	std::vector<shared_ptr<MyEngine::GameObject>> _lanes;
+	int _amountOfLanes;
+
+	shared_ptr<ComponentMusic> _musicManagaer;
+};

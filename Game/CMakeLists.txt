@@ -4,8 +4,6 @@ file(GLOB_RECURSE GRPO-Game-src "*.h" "*.cpp")
 
 configure_file(${CMAKE_SOURCE_DIR}/GPRO_ExamProject/Game/data/scene.json ${CMAKE_BINARY_DIR}/GPRO_ExamProject/Game/data/scene.json COPYONLY)
 
-
-
 add_executable(GRPO-Game ${GRPO-Game-src})
 
 target_include_directories(GRPO-Game PUBLIC ${MYENGINE_INCLUDE_DIR})
