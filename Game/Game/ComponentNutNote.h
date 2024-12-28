@@ -4,13 +4,12 @@
 class ComponentNutNote : public MyEngine::Component {
 public:
 	void Update(float) override;
-	ComponentNutNote(float startPos, float endPos, float DestinationBeat);
-	// Default constructor
 	ComponentNutNote();
-
+	void PrepareNut(float start, float end, float arrive, float destination);
+	float GetDestinationBeat();
 private:
-	float startPos = -200;
-	float endPos = 500;
-	float DestinationBeat = 8;
+	float startPos;
+	float endPos;
+	float DestinationBeat;
 	float startBeat = 9;
 };

@@ -1,6 +1,8 @@
 #pragma once
 
+#include "ComponentLane.h"
 #include "ComponentMusic.h"
+#include "ComponentPlayerController.h"
 #include "Engine/Component.h"
 
 using namespace std;
@@ -20,8 +22,10 @@ private:
 	glm::vec3 _offset;
 	std::vector<string> _keys;
 	std::vector<pair<float, float>> _sheet;
-	std::vector<shared_ptr<MyEngine::GameObject>> _lanes;
+	std::vector<shared_ptr<ComponentLane>> _lanes;
 	int _amountOfLanes;
 
 	shared_ptr<ComponentMusic> _musicManagaer;
+	shared_ptr<ComponentPlayerController> _player;
+
 };

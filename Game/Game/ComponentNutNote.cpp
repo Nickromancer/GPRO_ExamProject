@@ -4,23 +4,35 @@
 #include "Engine/Component.h"
 #include "iostream"
 #include <glm/ext/scalar_common.hpp>
-#include <glm/ext/vector_common.hpp>
-//#include "ComponentLaneManager.h" 
+//#include "ComponentLaneManager.h"
 
-ComponentNutNote::ComponentNutNote(float startPos, float endPos, float DestinationBeat) //constructor
-    : startPos(startPos), endPos(endPos), DestinationBeat(DestinationBeat) {
+ComponentNutNote::ComponentNutNote() {
     // Capture the time/beat when the nut is created
     auto music = MyEngine::Engine::GetInstance()->GetGameObject("root").lock();
     auto musicData = music->FindComponent<ComponentMusic>().lock();
     startBeat = musicData->GetCurrentBeat();  // Record the current beat as the start beat
     auto gameObject = GetGameObject().lock();
 
-   
+
 }
 
-ComponentNutNote::ComponentNutNote() // For testing purpose, discard when lane manager can provide position and beat
-    :startPos(-800), endPos(1200), DestinationBeat(15) {
+void ComponentNutNote::PrepareNut(float start, float end, float intialBeat, float destination)
+{
+    std::cout << "Prepared!" << "\n";
+    startPos = start;
+    endPos = end;
+    startBeat = intialBeat;
+    DestinationBeat = destination;
 }
+
+float ComponentNutNote::GetDestinationBeat()
+{
+    return DestinationBeat;
+}
+
+//ComponentNutNote::ComponentNutNote() // For testing purpose, discard when lane manager can provide position and beat
+//    :startPos(-800), endPos(1700), DestinationBeat(15) {
+//}
 
 // startPos = lane->GetStartPos();
 // endPos = lane->GetEndPos();
@@ -37,16 +49,16 @@ void ComponentNutNote::Update(float delta) {
     float t = (currentBeat - startBeat) / (DestinationBeat - startBeat);
     t = glm::clamp(t, 0.0f, 1.0f);  // Ensure 't' stays within [0, 1]
 
-    
-    
+
+
 
     // 3. Interpolate the X position using LERP
     float newPosX = (1 - t) * startPos + t * endPos;
     gameObject->SetPosition(glm::vec3(newPosX, 0, 0));
 
-   
+
     // 4. Destroy nut if it exceeds its target beat
-    if (currentBeat > DestinationBeat) {
-        MyEngine::Engine::GetInstance()->DestroyGameObject(gameObject.get());  
-    }
+    //if (currentBeat > DestinationBeat) {
+    //    MyEngine::Engine::GetInstance()->DestroyGameObject(gameObject.get());
+    //}
 }

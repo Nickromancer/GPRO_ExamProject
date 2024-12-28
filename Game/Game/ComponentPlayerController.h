@@ -10,11 +10,6 @@ public:
 	void Update(float delta) override;
 	void KeyEvent(SDL_Event&) override;
 
-private:
-
-
-
-
 	bool isF1Pressed = false;
 	bool isF2Pressed = false;
 	bool isF3Pressed = false;

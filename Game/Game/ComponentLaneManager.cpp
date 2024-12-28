@@ -13,6 +13,8 @@ void ComponentLaneManager::Init(rapidjson::Value& serializedData)
 	auto root = MyEngine::Engine::GetInstance()->GetGameObject("root").lock();
 
 	_musicManagaer = root->FindComponent<ComponentMusic>().lock();
+	_player = root->FindComponent<ComponentPlayerController>().lock();
+
 
 	_amountOfLanes = serializedData["amountOfLanes"].GetInt();
 
@@ -27,12 +29,16 @@ void ComponentLaneManager::Update(float)
 {
 	if (!_sheet.empty())
 	{
-		if (_musicManagaer->GetCurrentBeat() >= _sheet[0].first)
+		if (_musicManagaer->GetCurrentBeat() >= _sheet[0].first - BEAT_DELAY)
 		{
-		//Make a NUT
-		cout << "NUT!" << "\n";
-		_sheet.erase(_sheet.begin() + 0);
+			_lanes[0]->SpawnNutNote(_sheet[0].first);
+			_sheet.erase(_sheet.begin());
 		}
+	}
+
+	if (_player->isF1Pressed)
+	{
+		_lanes[0]->CheckNuts();
 	}
 
 }
@@ -43,14 +49,17 @@ shared_ptr<MyEngine::GameObject> ComponentLaneManager::CreateLane(string key, gl
 	auto gameObject = GetGameObject();
 
 	auto lane = engine->CreateGameObject(key, gameObject).lock();
+
 	auto renderer = lane->CreateComponent<ComponentRendererSprite>().lock();
 	lane->CreateComponent<ComponentLane>();
-	renderer->SetSprite("sprites", "pngkey.com-mario-pixel-png-1691566.png");
+	renderer->SetSprite("sprites", "Box.png");
 
 	auto sprite = renderer->GetSprite();
-	sprite->setScale({ 2, 1});
+	sprite->setPosition(glm::vec2(sprite->getPosition().x, sprite->getPosition().y));
+	sprite->setScale({ 1, 1 });
 
-	pos.y += sprite->getSpriteSize().y;
+	//pos.x += sprite->getSpriteSize().x;
+	//pos.y += sprite->getSpriteSize().y;
 	lane->SetPosition(pos);
 
 	return lane;
@@ -63,7 +72,7 @@ void ComponentLaneManager::CreateGrid()
 	for (unsigned int i = 0; i < _amountOfLanes; i++)
 	{
 		auto lane = CreateLane(_keys[i], startPos);
-		_lanes.push_back(lane);
+		_lanes.push_back(lane->FindComponent<ComponentLane>().lock());
 		startPos += _offset;
 	}
 }
