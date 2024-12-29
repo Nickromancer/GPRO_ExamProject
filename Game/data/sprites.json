@@ -2,7 +2,7 @@
 
 {
 	"filename": "Box.png",
-	"frame": {"x":0,"y":0,"w":2085,"h":535},
+	"frame": {"x":1024,"y":512,"w":2085,"h":535},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":2085,"h":535},
@@ -10,8 +10,80 @@
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
+	"filename": "Circle.png",
+	"frame": {"x":0,"y":1047,"w":540,"h":540},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":540,"h":540},
+	"sourceSize": {"w":540,"h":540},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
 	"filename": "coconut1_2.png",
-	"frame": {"x":2085,"y":0,"w":512,"h":512},
+	"frame": {"x":1350,"y":0,"w":512,"h":512},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":512,"h":512},
+	"sourceSize": {"w":512,"h":512},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "E.png",
+	"frame": {"x":1862,"y":0,"w":512,"h":512},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":512,"h":512},
+	"sourceSize": {"w":512,"h":512},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "Guitar.png",
+	"frame": {"x":540,"y":1047,"w":2588,"h":779},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":2588,"h":779},
+	"sourceSize": {"w":2588,"h":779},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "Q.png",
+	"frame": {"x":2374,"y":0,"w":512,"h":512},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":512,"h":512},
+	"sourceSize": {"w":512,"h":512},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "R.png",
+	"frame": {"x":0,"y":512,"w":512,"h":512},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":512,"h":512},
+	"sourceSize": {"w":512,"h":512},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "RickBackground.png",
+	"frame": {"x":0,"y":0,"w":900,"h":493},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":900,"h":493},
+	"sourceSize": {"w":900,"h":493},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "RickHead.png",
+	"frame": {"x":900,"y":0,"w":450,"h":500},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":450,"h":500},
+	"sourceSize": {"w":450,"h":500},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "W.png",
+	"frame": {"x":512,"y":512,"w":512,"h":512},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":512,"h":512},
@@ -23,8 +95,8 @@
 	"version": "1.0",
 	"image": "sprites.png",
 	"format": "RGBA8888",
-	"size": {"w":2597,"h":535},
+	"size": {"w":3128,"h":1826},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:d9be9f51112ebfa7ac6e0be336649294:d6a1b757dc6d2952a466377aaf3f510b:1eabdf11f75e3a4fe3147baf7b5be24b$"
+	"smartupdate": "$TexturePacker:SmartUpdate:efb3fe00f88a843385e61f2508403d0b:15c35d3e20bffb1d49362f6290721896:1eabdf11f75e3a4fe3147baf7b5be24b$"
 }
 }
