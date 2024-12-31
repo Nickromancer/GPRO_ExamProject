@@ -19,7 +19,11 @@ void ComponentPlayerController::Init(rapidjson::Value& serializedData) {
         std::cerr << "Error: 'keyBindings' not found in serialized data!" << std::endl;
     }
 }
-void ComponentPlayerController::Update(float delta) {}
+void ComponentPlayerController::Update(float delta)
+{
+    if (isSpacePressed)
+        isSpacePressed = false;
+}
 
 void ComponentPlayerController::KeyEvent(SDL_Event & event) {
 
@@ -39,12 +43,10 @@ void ComponentPlayerController::KeyEvent(SDL_Event & event) {
             case SDLK_r:
                 isRPressed = true;
                 break;
-            case SDLK_SPACE:
-                isSpacePressed = true;
-                break;
             case SDLK_RETURN:
                 isEnterPressed = true;
                 break;
+
             }
         }
         // Check if a key was released

@@ -25,7 +25,6 @@ ComponentLane::ComponentLane()
 		std::cout << "there was a problem loading the sound effects" << std::endl;
 		return;
 	}
-
 }
 
 void ComponentLane::Update(float x)
@@ -63,17 +62,16 @@ void ComponentLane::SpawnNutNote(float beat)
 	auto sprite = renderer->GetSprite();
 	sprite->setScale({ 1, 1 });
 
-
 	nutNode->SetPosition(glm::vec3(nutNode->GetPosition().x, gameObject.lock()->GetPosition().y, 0));
 }
 
-void ComponentLane::CheckNuts()
+float ComponentLane::CheckNuts()
 {
-	auto nutBeat = _nuts.front()->GetDestinationBeat();
-	auto musicBeat = _musicManagaer->GetCurrentBeat();
 
 	if (!_nuts.empty())
 	{
+		auto nutBeat = _nuts.front()->GetDestinationBeat();
+		auto musicBeat = _musicManagaer->GetCurrentBeat();
 		if (nutBeat - BEAT_FRAME <= musicBeat && nutBeat + BEAT_FRAME >= musicBeat)
 		{
 			if (nutBeat - BEAT_FRAME / 2 <= musicBeat && nutBeat + BEAT_FRAME / 2 >= musicBeat)
@@ -82,12 +80,21 @@ void ComponentLane::CheckNuts()
 				MyEngine::Engine::GetInstance()->DestroyGameObject(nut);
 				_nuts.pop();
 				Mix_PlayChannel(-1, soundGood, 0);
-				return;
+				return GOOD_SCORE;
 			}
 			auto nut = _nuts.front()->GetGameObject().lock().get();
 			MyEngine::Engine::GetInstance()->DestroyGameObject(nut);
 			_nuts.pop();
+
 			Mix_PlayChannel(-1, soundBad, 0);
+			return BAD_SCORE;
 		}
+		return BAD_SCORE;
 	}
 }
+
+void ComponentLane::Score()
+{
+}
+
+

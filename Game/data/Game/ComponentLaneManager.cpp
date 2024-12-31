@@ -33,36 +33,49 @@ void ComponentLaneManager::Update(float)
 			_sheet.erase(_sheet.begin());
 		}
 	}
-
-	if (_player->isSpacePressed)
-	{
-		if (_player->isQPressed && _amountOfLanes >= 1)
-			_lanes[0]->CheckNuts();
-		if (_player->isWPressed && _amountOfLanes >= 2)
-			_lanes[1]->CheckNuts();
-		if (_player->isEPressed && _amountOfLanes >= 3)
-			_lanes[2]->CheckNuts();
-		if (_player->isRPressed && _amountOfLanes >= 4)
-			_lanes[3]->CheckNuts();
-	}
-
 }
+
+void ComponentLaneManager::KeyEvent(SDL_Event& event)
+{
+	float tmp_score = 0;
+	if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_SPACE) {
+		if (_player->isQPressed && _amountOfLanes >= 1)
+			tmp_score += _lanes[0]->CheckNuts();
+		if (_player->isWPressed && _amountOfLanes >= 2)
+			tmp_score += _lanes[1]->CheckNuts();
+		if (_player->isEPressed && _amountOfLanes >= 3)
+			tmp_score += _lanes[2]->CheckNuts();
+		if (_player->isRPressed && _amountOfLanes >= 4)
+			tmp_score += _lanes[3]->CheckNuts();
+	}
+	score += tmp_score;
+}
+
+void ComponentLaneManager::Render(sre::RenderPass& renderPass)
+{
+	bool open = true;
+	ImGui::SetNextWindowPos(ImVec2(500, 20));
+	ImGui::SetNextWindowSize(ImVec2(100, 60));
+	ImGui::Begin("#TestLabel", &open, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoInputs);
+	ImGui::Text("Score: %d", (int) score);
+	ImGui::End();
+}
+
 
 shared_ptr<MyEngine::GameObject> ComponentLaneManager::CreateLane(string key, glm::vec3 pos)
 {
 	auto engine = MyEngine::Engine::GetInstance();
 	auto gameObject = GetGameObject();
 
-	auto lane = engine->CreateGameObject("Key_" + key, gameObject).lock();
-	auto circle = engine->CreateGameObject(key, lane).lock();
-
 	// Lane Setup
+	auto lane = engine->CreateGameObject("Key_" + key, gameObject).lock();
 	auto renderer = lane->CreateComponent<ComponentRendererSprite>().lock();
 	lane->CreateComponent<ComponentLane>();
 	renderer->SetSprite("sprites", "Box.png");
 	lane->SetPosition(pos);
 
 	// Beat Frame Setup
+	auto circle = engine->CreateGameObject(key, lane).lock();
 	auto rendererCircle = circle->CreateComponent<ComponentRendererSprite>().lock();
 	rendererCircle->SetSprite("sprites", key + ".png");
 	rendererCircle->GetSprite()->setScale(glm::vec2(0.5f));
@@ -88,12 +101,9 @@ void ComponentLaneManager::ParseNoteSheet(rapidjson::Value& noteSheet)
 {
 	auto noteArray = noteSheet.GetArray();
 	//TODO change back!
-	for (int i = 0; i < 100; i = i + 2)
+	for (int i = 0; i < noteArray.Size(); i++)
 	{
-		_sheet.emplace_back(i, noteArray[0][1].GetFloat());
-		_sheet.emplace_back(i + 0.01f, noteArray[1][1].GetFloat());
-		_sheet.emplace_back(i + 0.02f, noteArray[2][1].GetFloat());
-		_sheet.emplace_back(i + 0.03f, noteArray[3][1].GetFloat());
+		_sheet.emplace_back(noteArray[i][0].GetFloat(), noteArray[i][1].GetFloat());
 	}
 }
 

@@ -12,6 +12,8 @@ class ComponentLaneManager : public MyEngine::Component
 {
 	void Init(rapidjson::Value& serializedData) override;
 	void Update(float) override;
+	void KeyEvent(SDL_Event&) override;
+	void Render(sre::RenderPass& renderPass) override;
 	shared_ptr<MyEngine::GameObject> CreateLane(string key, glm::vec3 pos);
 	void CreateGrid();
 	void ParseNoteSheet(rapidjson::Value& noteSheet);
@@ -24,7 +26,7 @@ private:
 	std::vector<pair<float, float>> _sheet;
 	std::vector<shared_ptr<ComponentLane>> _lanes;
 	int _amountOfLanes;
-
+	float score;
 	shared_ptr<ComponentMusic> _musicManagaer;
 	shared_ptr<ComponentPlayerController> _player;
 
