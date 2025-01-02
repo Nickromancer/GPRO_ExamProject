@@ -1,12 +1,12 @@
 #include "Engine/MyEngine.h"
 #include "Engine/ComponentFactory.h"
 
-#include "Game/ComponentMusic.h"
-#include "Game/ComponentNode.h"
-#include "Game/ComponentBackground.h"
-#include "Game/ComponentLaneManager.h"
-#include "Game/ComponentNutNote.h"
-#include "Game/ComponentPlayerController.h"
+#include "data/Game/ComponentMusic.h"
+#include "data/Game/ComponentNode.h"
+#include "data/Game/ComponentBackground.h"
+#include "data/Game/ComponentLaneManager.h"
+#include "data/Game/ComponentNutNote.h"
+#include "data/Game/ComponentPlayerController.h"
 
 MyEngine::Engine engine;
 

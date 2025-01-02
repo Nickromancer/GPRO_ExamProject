@@ -1,8 +1,26 @@
 {"frames": [
 
 {
+	"filename": "Box.png",
+	"frame": {"x":1024,"y":512,"w":2085,"h":535},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":2085,"h":535},
+	"sourceSize": {"w":2085,"h":535},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "Circle.png",
+	"frame": {"x":0,"y":1047,"w":540,"h":540},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":540,"h":540},
+	"sourceSize": {"w":540,"h":540},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
 	"filename": "coconut1_2.png",
-	"frame": {"x":0,"y":0,"w":512,"h":512},
+	"frame": {"x":1350,"y":0,"w":512,"h":512},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":512,"h":512},
@@ -10,12 +28,66 @@
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
-	"filename": "pngkey.com-mario-pixel-png-1691566.png",
-	"frame": {"x":0,"y":512,"w":701,"h":261},
+	"filename": "E.png",
+	"frame": {"x":1862,"y":0,"w":512,"h":512},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":701,"h":261},
-	"sourceSize": {"w":701,"h":261},
+	"spriteSourceSize": {"x":0,"y":0,"w":512,"h":512},
+	"sourceSize": {"w":512,"h":512},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "Guitar.png",
+	"frame": {"x":540,"y":1047,"w":2588,"h":779},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":2588,"h":779},
+	"sourceSize": {"w":2588,"h":779},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "Q.png",
+	"frame": {"x":2374,"y":0,"w":512,"h":512},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":512,"h":512},
+	"sourceSize": {"w":512,"h":512},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "R.png",
+	"frame": {"x":0,"y":512,"w":512,"h":512},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":512,"h":512},
+	"sourceSize": {"w":512,"h":512},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "RickBackground.png",
+	"frame": {"x":0,"y":0,"w":900,"h":493},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":900,"h":493},
+	"sourceSize": {"w":900,"h":493},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "RickHead.png",
+	"frame": {"x":900,"y":0,"w":450,"h":500},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":450,"h":500},
+	"sourceSize": {"w":450,"h":500},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "W.png",
+	"frame": {"x":512,"y":512,"w":512,"h":512},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":512,"h":512},
+	"sourceSize": {"w":512,"h":512},
 	"pivot": {"x":0.5,"y":0.5}
 }],
 "meta": {
@@ -23,8 +95,8 @@
 	"version": "1.0",
 	"image": "sprites.png",
 	"format": "RGBA8888",
-	"size": {"w":701,"h":773},
+	"size": {"w":3128,"h":1826},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:ff34ef1adf77bf2bafec0a9e332aedf9:8fa7cb28840ad4e1220c3e199c988409:1eabdf11f75e3a4fe3147baf7b5be24b$"
+	"smartupdate": "$TexturePacker:SmartUpdate:efb3fe00f88a843385e61f2508403d0b:15c35d3e20bffb1d49362f6290721896:1eabdf11f75e3a4fe3147baf7b5be24b$"
 }
 }
