@@ -18,7 +18,7 @@ void ComponentMusic::Init(rapidjson::Value& serilizedData) {
         return;
     }
 
-    /* Load the WAV */
+    // Load the WAV
     // the specs, length and buffer of our wav are filled
     if (SDL_LoadWAV(musicPath.c_str(), &wav_spec, &wav_buffer, &wav_length) == nullptr) {
         return;
@@ -35,7 +35,7 @@ void ComponentMusic::Init(rapidjson::Value& serilizedData) {
     audio_len = wav_length; // copy file length
 
 
-    /* Open the audio device */
+    // Open the audio device
     if (SDL_OpenAudio(&wav_spec, nullptr) < 0) {
         cout << "Couldn't open audio: " << SDL_GetError() << "\n";
         return;
@@ -43,7 +43,7 @@ void ComponentMusic::Init(rapidjson::Value& serilizedData) {
 
     startTime = std::chrono::steady_clock::now();
 
-    /* Start playing */
+    // Start playing
     SDL_PauseAudio(0);
 
     StartProcessingThread();
@@ -56,7 +56,10 @@ void ComponentMusic::Update(float delta)
 void ComponentMusic::my_audio_callback(void* userdata, Uint8* stream, int len)
 {
     if (audio_len == 0)
+    {
+        ComponentMusic::~ComponentMusic();
         return;
+    }
 
     len = (len > audio_len ? audio_len : len);
 
@@ -71,7 +74,8 @@ void ComponentMusic::my_audio_callback(void* userdata, Uint8* stream, int len)
     // Notify the processing thread
     audioCond.notify_one();
 
-    SDL_memcpy(stream, audio_pos, len); // Write audio to output
+    // Write audio to output
+    SDL_memcpy(stream, audio_pos, len);
     audio_pos += len;
     audio_len -= len;
 }
@@ -81,7 +85,6 @@ void ComponentMusic::StartProcessingThread()
     std::thread([this]() {
         while (audio_len > 0 || !audioQueue.empty()) {
             std::vector<Uint8> buffer;
-
             {
                 // Wait until there is audio data in the queue
                 std::unique_lock<std::mutex> lock(audioMutex);
@@ -116,10 +119,11 @@ void ComponentMusic::ProcessAudio(const std::vector<Uint8>& buffer)
     double elapsedTime = totalSamplesProcessed / static_cast<double>(wav_spec.freq);
     double beat = (elapsedTime / 60.0) * bpm;
 
-    system("cls");
-    std::cout << "Elapsed Time: " << elapsedTime << " s, Current Beat: " << beat << "\n";
-    currentBeat = beat;
+    //This is to monitor the current BPM
+    //system("cls");
+    //std::cout << "Elapsed Time: " << elapsedTime << " s, Current Beat: " << beat << "\n";
 
+    currentBeat = beat;
 }
 
 double ComponentMusic::GetCurrentBeat()

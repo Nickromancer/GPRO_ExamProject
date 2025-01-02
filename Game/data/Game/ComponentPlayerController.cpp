@@ -1,10 +1,9 @@
-#pragma
+#pragma once
 
 #include "ComponentPlayerController.h"
 #include "Engine/MyEngine.h"
-#include "ComponentMusic.h"
-#include "Engine/Component.h"
 #include "SDL.h"
+
 void ComponentPlayerController::Init(rapidjson::Value& serializedData) {
     if (!serializedData.IsObject()) {
         std::cerr << "Error: Serialized data is not an object!" << std::endl;
@@ -21,8 +20,6 @@ void ComponentPlayerController::Init(rapidjson::Value& serializedData) {
 }
 void ComponentPlayerController::Update(float delta)
 {
-    if (isSpacePressed)
-        isSpacePressed = false;
 }
 
 void ComponentPlayerController::KeyEvent(SDL_Event & event) {
@@ -63,9 +60,6 @@ void ComponentPlayerController::KeyEvent(SDL_Event & event) {
                 break;
             case SDLK_r:
                 isRPressed = false;
-                break;
-            case SDLK_SPACE:
-                isSpacePressed = false;
                 break;
             case SDLK_RETURN:
                 isEnterPressed = false;

@@ -17,13 +17,14 @@ public:
 	double GetCurrentBeat();
 	~ComponentMusic();
 
-	double bpm;      // Beats per minute (set manually or dynamically)
-	double timeSig = 4;    // Time signature (e.g., 4.0 for 4/4 time)
 private:
 	std::chrono::steady_clock::time_point startTime;
 	std::string musicPath;
 	Mix_Music* music;
 	double currentBeat = 0;
+
+	double bpm;      // Beats per minute (set manually or dynamically)
+	double timeSig = 4;    // Time signature (e.g., 4.0 for 4/4 time)
 
 	Uint8* audio_pos; // global pointer to the audio buffer to be played
 	Uint32 audio_len; // remaining length of the sample we have to play

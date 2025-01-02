@@ -47,7 +47,6 @@ void ComponentLane::SpawnNutNote(float beat)
 	auto gameObject = GetGameObject();
 	auto laneSprite = gameObject.lock()->FindComponent<ComponentRendererSprite>().lock();
 	float laneWidth = laneSprite->GetSprite()->getSpriteSize().x;
-	float lanePos = laneSprite->GetSprite()->getSpritePos().x;
 
 	auto nutNode = engine->CreateGameObject("NUT_" + std::to_string(beat), gameObject).lock();
 	auto renderer = nutNode->CreateComponent<ComponentRendererSprite>().lock();
@@ -58,10 +57,6 @@ void ComponentLane::SpawnNutNote(float beat)
 	_nuts.push(nut);
 
 	renderer->SetSprite("sprites", "RickHead.png");
-
-	auto sprite = renderer->GetSprite();
-	sprite->setScale({ 1, 1 });
-
 	nutNode->SetPosition(glm::vec3(nutNode->GetPosition().x, gameObject.lock()->GetPosition().y, 0));
 }
 
@@ -72,8 +67,10 @@ float ComponentLane::CheckNuts()
 	{
 		auto nutBeat = _nuts.front()->GetDestinationBeat();
 		auto musicBeat = _musicManagaer->GetCurrentBeat();
+		// Bad Timing Frame
 		if (nutBeat - BEAT_FRAME <= musicBeat && nutBeat + BEAT_FRAME >= musicBeat)
 		{
+			// Good Timing Frame
 			if (nutBeat - BEAT_FRAME / 2 <= musicBeat && nutBeat + BEAT_FRAME / 2 >= musicBeat)
 			{
 				auto nut = _nuts.front()->GetGameObject().lock().get();
@@ -91,10 +88,6 @@ float ComponentLane::CheckNuts()
 		}
 		return BAD_SCORE;
 	}
-}
-
-void ComponentLane::Score()
-{
 }
 
 

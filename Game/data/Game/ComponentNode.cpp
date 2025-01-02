@@ -19,16 +19,17 @@ void ComponentNode::Update(float delta)
 
     double beat = musicData->GetCurrentBeat();
 
-    // Define beat duration and scale limits
+    // Beat duration and scale limits
     double beatCycle = 1.0;
-    double beatProgress = fmod(beat, beatCycle) / beatCycle; // Progress within the beat cycle (0.0 to 1.0)
+    // Progress within the beat cycle (0.0 to 1.0)
+    double beatProgress = fmod(beat, beatCycle) / beatCycle;
 
-    // Define minimum and maximum scales for interpolation
-    glm::vec3 minScale(0.5f, 0.5f, 0.5f); // Minimum scale
-    glm::vec3 maxScale(0.6f, 0.6f, 0.6f); // Maximum scale
+    // Minimum and maximum scales for interpolation
+    glm::vec3 minScale(0.5f, 0.5f, 0.5f);
+    glm::vec3 maxScale(0.6f, 0.6f, 0.6f);
 
     // Use a smooth sine wave for fluidity
-    float sineWave = 0.5f * (1.0f - cos(beatProgress * glm::two_pi<float>())); // Smooth transition using a sine wave
+    float sineWave = 0.5f * (1.0f - cos(beatProgress * glm::two_pi<float>()));
 
     // Interpolate scale based on the sine wave
     glm::vec3 interpolatedScale = glm::mix(minScale, maxScale, sineWave);

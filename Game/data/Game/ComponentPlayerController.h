@@ -15,8 +15,7 @@ public:
 	bool isEPressed = false;
 	bool isRPressed = false;
 	bool isEnterPressed = false;
-	bool isSpacePressed = false;
-public:
 
+public:
 	ComponentPlayerController() = default;
 };

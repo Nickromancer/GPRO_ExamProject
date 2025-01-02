@@ -12,7 +12,7 @@ private:
 	float startPos;
 	float endPos;
 	float DestinationBeat;
-	float startBeat = 9;
+	float startBeat;
 
 	std::shared_ptr<MyEngine::GameObject> music;
 	std::shared_ptr<ComponentMusic> musicData;

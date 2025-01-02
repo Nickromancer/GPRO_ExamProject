@@ -1,7 +1,6 @@
 #pragma once
 
 #include <queue>
-
 #include "ComponentMusic.h"
 #include "ComponentNutNote.h"
 #include "Engine/Component.h"
@@ -19,7 +18,6 @@ public:
 	void Update(float) override;
 	void SpawnNutNote(float beat);
 	float CheckNuts();
-	void Score();
 private:
 	std::queue<std::shared_ptr<ComponentNutNote>> _nuts;
 	std::shared_ptr<ComponentMusic> _musicManagaer;

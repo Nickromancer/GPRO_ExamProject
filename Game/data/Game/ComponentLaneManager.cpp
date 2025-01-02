@@ -20,7 +20,6 @@ void ComponentLaneManager::Init(rapidjson::Value& serializedData)
 	ParseKeybinds(serializedData["keybinds"]);
 	ParseNoteSheet(serializedData["noteSheet"]);
 	CreateGrid();
-
 }
 
 void ComponentLaneManager::Update(float)
@@ -100,7 +99,7 @@ void ComponentLaneManager::CreateGrid()
 void ComponentLaneManager::ParseNoteSheet(rapidjson::Value& noteSheet)
 {
 	auto noteArray = noteSheet.GetArray();
-	//TODO change back!
+
 	for (int i = 0; i < noteArray.Size(); i++)
 	{
 		_sheet.emplace_back(noteArray[i][0].GetFloat(), noteArray[i][1].GetFloat());

@@ -14,6 +14,7 @@ class ComponentLaneManager : public MyEngine::Component
 	void Update(float) override;
 	void KeyEvent(SDL_Event&) override;
 	void Render(sre::RenderPass& renderPass) override;
+
 	shared_ptr<MyEngine::GameObject> CreateLane(string key, glm::vec3 pos);
 	void CreateGrid();
 	void ParseNoteSheet(rapidjson::Value& noteSheet);

@@ -2,21 +2,20 @@
 #include "ComponentMusic.h"
 #include "Engine/MyEngine.h"
 #include "Engine/Component.h"
-#include "iostream"
 #include <glm/ext/scalar_common.hpp>
-//#include "ComponentLaneManager.h"
 
 ComponentNutNote::ComponentNutNote() {
     // Capture the time/beat when the nut is created
     music = MyEngine::Engine::GetInstance()->GetGameObject("root").lock();
     musicData = music->FindComponent<ComponentMusic>().lock();
-    startBeat = musicData->GetCurrentBeat();  // Record the current beat as the start beat
+
+    // Record the current beat as the start beat
+    startBeat = musicData->GetCurrentBeat();
     auto gameObject = GetGameObject().lock();
 }
 
 void ComponentNutNote::PrepareNut(float start, float end, float intialBeat, float destination)
 {
-    std::cout << "Prepared!" << "\n";
     startPos = start;
     endPos = end;
     startBeat = intialBeat;
